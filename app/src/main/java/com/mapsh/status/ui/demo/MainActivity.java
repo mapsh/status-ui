@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         new StatusProvider.OnStatusViewCreateCallback() {
                             @Override
                             public void onCreate(int status, View statusView) {
-                                Log.e("tag", "回调");
+
                             }
                         }));
 

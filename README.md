@@ -45,22 +45,22 @@ public class Default {
 
 
 ```java
-//STATUS_LOADING：正在加载
+//Default.LOADING：正在加载
 DefaultStatusProvider.DefaultLoadingStatusView
 
-///STATUS_EMPTY：数据为空，一般用在列表页
+///Default.EMPTY：数据为空，一般用在列表页
 DefaultStatusProvider.DefaultEmptyStatusView
 
-//STATUS_NETOFF：没网了
+//Default.NETOFF：没网了
 DefaultStatusProvider.DefaultNetOffStatusView
 
-//STATUS_SERVER_ERROR： 服务器出问题了，生产环境是可能出这个问题的
+//Default.SERVER_ERROR： 服务器出问题了，生产环境是可能出这个问题的
 DefaultStatusProvider.DefaultServerErrorStatusView
 
-//STATUS_LOGIC_FAIL：请求本身没有问题，但业务逻辑有问题，例如注册用户时，用户名重复，一般都会带个业务code
+//Default.LOGIC_FAIL：请求本身没有问题，但业务逻辑有问题，例如注册用户时，用户名重复，一般都会带个业务code
 DefaultStatusProvider.DefaultLogicFailStatusView
 
-//STATUS_lOCAL_ERROR：请求本身没有问题，但处理数据时出异常了，虽然是手机端代码的问题，但大多数是服务器json给的不规范
+//Default.LOCAL_ERROR：请求本身没有问题，但处理数据时出异常了，虽然是手机端代码的问题，但大多数是服务器json给的不规范
 DefaultStatusProvider.DefaultLocalErrorStatusView
 ```
 
@@ -85,80 +85,70 @@ statusUIManager里其实是一个map，存储了所有你设置的StatusProvider
 
 ```java
 一般代码如下：
-private void initStatusUI(){
-    statusUIManager = new StatusUIManager();
+private void initStatusUI() {
+        statusUIManager = new StatusUIManager();
 
-    statusUIManager.addStatusProvider(
-            new DefaultStatusProvider.DefaultLoadingStatusView(
-                    getActivity(),
-                    DefaultStatus.STATUS_LOADING,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultLoadingStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
 
-        }
-    }));
+                            }
+                        }));
 
-    statusUIManager.addStatusProvider(
-            new DefaultStatusProvider.DefaultEmptyStatusView(getActivity(),
-                    DefaultStatus.STATUS_EMPTY,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultEmptyStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
 
-        }
-    }));
+                            }
+                        }));
 
-    statusUIManager.addStatusProvider(D
-            new DefaultStatusProvider.DefaultServerErrorStatusView(
-                    getActivity(),
-                    DefaultStatus.STATUS_SERVER_ERROR,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultServerErrorStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
 
-        }
-    }));
+                            }
+                        }));
 
-    statusUIManager.addStatusProvider(
-            new DefaultStatusProvider.DefaultLogicFailStatusView(getActivity(),
-                    DefaultStatus.STATUS_LOGIC_FAIL,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultLogicFailStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
+                                
+                            }
+                        }));
 
-        }
-    }));
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultNetOffStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
 
-    statusUIManager.addStatusProvider(
-            new DefaultStatusProvider.DefaultNetOffStatusView(
-                    getActivity(),
-                    DefaultStatus.STATUS_NETOFF,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+                            }
+                        }));
 
-        }
-    }));
+        statusUIManager.addStatusProvider(
+                new DefaultStatusProvider.DefaultLocalErrorStatusView(
+                        contentView,
+                        new StatusProvider.OnStatusViewCreateCallback() {
+                            @Override
+                            public void onCreate(int status, View statusView) {
 
-    statusUIManager.addStatusProvider(
-            new DefaultStatusProvider.DefaultLocalErrorStatusView(
-                    getActivity(),
-                    DefaultStatus.STATUS_lOCAL_ERROR,
-                    content,
-                    new StatusProvider.OnStatusViewCreateCallback() {
-        @Override
-        public void onCreate(int status, View statusView) {
+                            }
+                        }));
 
-        }
-    }));
-
-}
+    }
 
 
 ```
