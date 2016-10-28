@@ -25,7 +25,7 @@ demo：
 
 ## 2 怎么用？
 
-### 1 状态定制，默认的状态在DefaultStatus里
+### 1 状态定制，默认的状态在Default里
 
 ```java
 public class Default {
@@ -36,9 +36,6 @@ public class Default {
      public static final int LOGIC_FAIL = 4;
      public static final int LOCAL_ERROR = 5;
 }
-
-反正就是个字符串常量，你在哪儿都可以自己定义
-
 ```
 
 ### 2 给各个状态配置不同UI，对应默认状态的UI都在DefaultStatusProvider
