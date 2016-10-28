@@ -28,13 +28,13 @@ demo：
 ### 1 状态定制，默认的状态在DefaultStatus里
 
 ```java
-public class DefaultStatus {
-    public static final String STATUS_LOADING = "loading";
-    public static final String STATUS_EMPTY = "empty";
-    public static final String STATUS_NETOFF = "netoff";
-    public static final String STATUS_SERVER_ERROR = "server-error";
-    public static final String STATUS_LOGIC_FAIL = "logic-fail";
-    public static final String STATUS_lOCAL_ERROR = "local-error";
+public class Default {
+     public static final int LOADING = 0;
+     public static final int EMPTY = 1;
+     public static final int NET_OFF = 2;
+     public static final int SERVER_ERROR = 3;
+     public static final int LOGIC_FAIL = 4;
+     public static final int LOCAL_ERROR = 5;
 }
 
 反正就是个字符串常量，你在哪儿都可以自己定义
@@ -66,18 +66,18 @@ DefaultStatusProvider.DefaultLocalErrorStatusView
 
 StatusProvider到底怎么回事？
 ```java
-StatusProvider(Context context, String status, View contentView, OnStatusViewCreateCallback callback)
-意思就是状态提供者，名字取的不太合适，应该是状态UI提供者
+StatusProvider(int status, View contentView, OnStatusViewCreateCallback callback)
+状态UI提供器
 
-参数2：对应哪个status
-参数3：内容View，即正常数据的View，必须包在一个FrameLayout里
+参数1：对应哪个status
+参数2：内容View，即正常数据的View，必须包在一个FrameLayout里
 参数3：callback，状态UI初始化之后，可以做一些样式设置，事件设置等
 ```
 
 ### 3 控制显示状态UI和内容UI
 
 ```java
-statusUIManager.show(String status) //显示对应状态UI
+statusUIManager.show(int status) //显示对应状态UI
 statusUIManager.clearStatus()   //显示内容UI
 
 statusUIManager里其实是一个map，存储了所有你设置的StatusProvider
